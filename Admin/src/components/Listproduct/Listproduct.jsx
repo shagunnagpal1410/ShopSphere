@@ -5,7 +5,7 @@ import delete_icon from '../../Assets/delete.svg'
 const Listproduct = () => {
     const [allproducts, setallproducts] = useState([]);
     const fetchinfo = async () => {
-        await fetch(`${import.meta.env.VITE_API_URL}/allproducts`).then((res) => res.json()).then((data) => {
+        await fetch(`https://shopsphere-nfq5.onrender.com/allproducts`).then((res) => res.json()).then((data) => {
             setallproducts(data)
         });
     }
@@ -13,7 +13,7 @@ const Listproduct = () => {
         fetchinfo();
     }, [])
     const remove_product = async (id) => {
-        await fetch(`${import.meta.env.VITE_API_URL}/removeproduct`, {
+        await fetch(`https://shopsphere-nfq5.onrender.com/removeproduct`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

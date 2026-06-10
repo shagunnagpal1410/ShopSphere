@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 const Popular = () => {
   const [popular, setpopular] = useState([]);
   useEffect(()=> {
-    fetch(`${import.meta.env.VITE_API_URL}/popular`).then((res)=>res.json()).then((data)=>setpopular(data));
+    fetch(`https://shopsphere-nfq5.onrender.com/popular`).then((res)=>res.json()).then((data)=>setpopular(data));
   }, [])
   return (
     <div className='bg-linear-to-b from-[#C4E2F5] from-0% to-[#e1ffea22] to-100% flex flex-col gap-2.5 pt-[5vh] pb-[10vh] items-center'>

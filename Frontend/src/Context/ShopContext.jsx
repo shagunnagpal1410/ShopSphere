@@ -11,9 +11,9 @@ const getdefaultcart = () => {
 const ShopContextProvider = (props) => {
     const [all_products, setall_products] = useState([]);
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/allproducts`).then((res) => res.json()).then((data) => setall_products(data));
+        fetch(`https://shopsphere-nfq5.onrender.com/allproducts`).then((res) => res.json()).then((data) => setall_products(data));
         if (localStorage.getItem('auth-token')) {
-            fetch(`${import.meta.env.VITE_API_URL}/getcart`, {
+            fetch(`https://shopsphere-nfq5.onrender.com/getcart`, {
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -29,7 +29,7 @@ const ShopContextProvider = (props) => {
     const addtocart = ((itemid) => {
         setcartitems((prev) => ({ ...prev, [itemid]: prev[itemid] + 1 }));
         if (localStorage.getItem('auth-token')) {
-            fetch(`${import.meta.env.VITE_API_URL}/addtocart`, {
+            fetch(`https://shopsphere-nfq5.onrender.com/addtocart`, {
                 method: 'POST',
                 headers: {
                     Accept: 'aaplication/form-data',
@@ -43,7 +43,7 @@ const ShopContextProvider = (props) => {
     const removefromcart = ((itemid) => {
         setcartitems((prev) => (prev[itemid] > 0 ? { ...prev, [itemid]: prev[itemid] - 1 } : prev));
         if (localStorage.getItem('auth-token')) {
-            fetch(`${import.meta.env.VITE_API_URL}/removefromcart`, {
+            fetch(`https://shopsphere-nfq5.onrender.com/removefromcart`, {
                 method: 'POST',
                 headers: {
                     Accept: 'aaplication/form-data',

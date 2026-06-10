@@ -33,7 +33,12 @@ const upload=multer({storage:storage});
 //creating upload endpoint for images
 app.use('/images',express.static('upload/images'))
 app.post("/upload", upload.single('product'), (req,res)=> {
-    res.json({success:1, image_url:`${import.meta.env.VITE_API_URL}/images/${req.file.filename}`})
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+
+    res.json({
+        success:1,
+        image_url:`${baseUrl}/images/${req.file.filename}`
+    })
 })
 //schema for products
 const Product=mongoose.model("Product", {

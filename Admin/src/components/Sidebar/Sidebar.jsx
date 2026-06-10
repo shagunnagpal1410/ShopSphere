@@ -13,7 +13,6 @@ const Sidebar = () => {
       </Link>
       <Link to='/listproduct' className='decoration-none'>
         <div className="sidebar-item  flex items-center justify-center sm:my-5 py-1.25 px-2.5 rounded-md bg-[#f6f6f6] gap-5 cursor-pointer">
-            <img src={product_list} />
             <p>Product list</p>
         </div>
       </Link>

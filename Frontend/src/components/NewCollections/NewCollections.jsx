@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react'
 const NewCollections = () => {
   const [new_collection, setnew_collection] = useState([])
  useEffect(() => {
-  console.log("API URL =", import.meta.env.VITE_API_URL);
-
-  fetch(`${https://shopsphere-nfq5.onrender.com}/newcollection`)
-    .then((res) => res.text())
-    .then((data) => console.log(data));
+  fetch("https://shopsphere-nfq5.onrender.com/newcollection")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("DATA:", data);
+      setnew_collection(data);
+    })
+    .catch((err) => console.error(err));
 }, []);
 console.log("State:", new_collection);
   return (

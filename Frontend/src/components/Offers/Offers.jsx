@@ -1,6 +1,6 @@
 import React from 'react'
 import './output.css'
-import exclusive from '../assets/exclusive.png'
+import exclusive from '../Assets/exclusive.png'
 const Offers = () => {
   return (
     <div className="box w-screen bg-linear-to-t from-[#C4E2F5] from-0% to-[#e1ffea22] to-100%">

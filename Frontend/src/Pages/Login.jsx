@@ -10,7 +10,7 @@ const Login = () => {
   })
   const login=async ()=> {
     let responsedata;
-    await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+    await fetch(`https://shopsphere-nfq5.onrender.com/login`, {
       method:'POST',
       headers:{
         Accept:'application/form-data',
@@ -28,7 +28,7 @@ const Login = () => {
   }
   const signup=async ()=> {
      let responsedata;
-    await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
+    await fetch(`https://shopsphere-nfq5.onrender.com/signup`, {
       method:'POST',
       headers:{
         Accept:'application/form-data',

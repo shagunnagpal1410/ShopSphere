@@ -2,7 +2,6 @@ import React from 'react'
 import './output.css'
 import {Link} from 'react-router-dom'
 import cart from '../../Assets/cart.svg'
-import product_list from '../../Assets/product_list_icon.svg'
 const Sidebar = () => {
   return (
     <div className='sidebar flex sm:flex-col pt-7.5 gap-5 w-full sm:max-w-62.5 sm:h-screen bg-linear-to-t from-[#C4E2F5] to-[#e1ffea22] justify-center sm:justify-start'>

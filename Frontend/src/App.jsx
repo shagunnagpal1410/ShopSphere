@@ -10,7 +10,6 @@ import men_banner from './components/Assets/men_banner.webp'
 import women_banner from './components/Assets/women_banner.jpg'
 import kids_banner from './components/Assets/kids_banner.webp' 
 function App() {
-  console.log(import.meta.env.VITE_API_URL);
   return (
     <>
     <BrowserRouter>

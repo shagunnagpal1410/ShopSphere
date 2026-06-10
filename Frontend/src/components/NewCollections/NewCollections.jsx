@@ -5,17 +5,11 @@ import { useState, useEffect } from 'react'
 const NewCollections = () => {
   const [new_collection, setnew_collection] = useState([])
  useEffect(() => {
-  fetch('https://shopsphere-nfq5.onrender.com/newcollection')
-    .then((res) => {
-      console.log("URL:", res.url);
-      console.log("Status:", res.status);
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-      setnew_collection(data);
-    })
-    .catch((err) => console.log(err));
+  console.log("API URL =", import.meta.env.VITE_API_URL);
+
+  fetch(`${import.meta.env.VITE_API_URL}/newcollection`)
+    .then((res) => res.text())
+    .then((data) => console.log(data));
 }, []);
 console.log("State:", new_collection);
   return (

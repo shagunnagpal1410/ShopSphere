@@ -32,14 +32,12 @@ const storage=multer.diskStorage({
 const upload=multer({storage:storage});
 //creating upload endpoint for images
 app.use('/images',express.static('upload/images'))
-app.post("/upload", upload.single('product'), (req,res)=> {
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-
+app.post('/upload', upload.single('product'), (req, res) => {
     res.json({
-        success:1,
-        image_url:`${baseUrl}/images/${req.file.filename}`
-    })
-})
+        success: 1,
+        image_url: `https://shopsphere-nfq5.onrender.com/images/${req.file.filename}`
+    });
+});
 //schema for products
 const Product=mongoose.model("Product", {
     id: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import './output.css'
-import hi from '../assets/hi.png'
-import fashion from '../assets/fashion.png'
+import hi from '../Assets/hi.png'
+import fashion from '../Assets/fashion.png'
 const Hero = () => {
     return (
         <div className='h-[60vh] sm:h-screen  bg-linear-to-t from-[#C4E2F5] from-0% to-[#e1ffea22] to-100% flex p-10 justify-between'>

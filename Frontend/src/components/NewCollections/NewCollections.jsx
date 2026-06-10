@@ -4,9 +4,11 @@ import './output.css'
 import { useState, useEffect } from 'react'
 const NewCollections = () => {
   const [new_collection, setnew_collection] = useState([])
-  useEffect(()=> {
-    fetch(`https://shopsphere-nfq5.onrender.com`).then((res)=>res.json()).then((data)=>setnew_collection(data));
-  }, [])
+  useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/newcollection`)
+    .then((res) => res.json())
+    .then((data) => setnew_collection(data));
+}, []);
   return (
     <div className='bg-linear-to-b from-[#C4E2F5] from-0% to-[#e1ffea22] to-100% flex flex-col gap-2.5 pt-[5vh] pb-[10vh] items-center'>
       <h1 className='text-4xl  tracking-tight text-[#171717] font-semibold'>NEW COLLECTION</h1>

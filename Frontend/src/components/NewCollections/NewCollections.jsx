@@ -7,7 +7,7 @@ const NewCollections = () => {
  useEffect(() => {
   console.log("API URL =", import.meta.env.VITE_API_URL);
 
-  fetch(`${import.meta.env.VITE_API_URL}/newcollection`)
+  fetch(`${https://shopsphere-nfq5.onrender.com}/newcollection`)
     .then((res) => res.text())
     .then((data) => console.log(data));
 }, []);

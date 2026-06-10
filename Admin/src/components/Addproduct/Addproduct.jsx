@@ -16,7 +16,7 @@ const Addproduct = () => {
         let product=productdetails;
         let formdata=new FormData();
         formdata.append('product',image);
-        await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+        await fetch(`https://shopsphere-nfq5.onrender.com/upload`, {
             method:'POST',
             headers:{
                 Accept:'application/json'
@@ -25,7 +25,7 @@ const Addproduct = () => {
         } ).then((res)=> res.json()).then((data)=>{responsedata=data})
         if(responsedata.success) {
             product.image=responsedata.image_url;
-            await fetch(`${import.meta.env.VITE_API_URL}/addproduct`, {
+            await fetch(`https://shopsphere-nfq5.onrender.com/addproduct`, {
                 method:'POST',
                 headers: {
                     Accept:'application/json',

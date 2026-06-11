@@ -193,6 +193,12 @@ app.get('/newcollection',async (req,res)=> {
     let newcollection=products.slice(1).slice(-8);
     res.send(newcollection);
 })
+//creating endpoint for related products
+app.get('/relatedproducts',async (req,res)=> {
+    let products=await Product.find({});
+    let relatedproducts=products.slice(1).slice(-4);
+    res.send(relatedproducts);
+})
 //creating endpoint for popular
 app.get('/popular', async (req,res)=> {
     let products=await Product.find({});

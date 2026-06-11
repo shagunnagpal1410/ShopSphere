@@ -25,7 +25,7 @@ const Listproduct = () => {
     }
     return (
         <div className='flex flex-col items-center w-[95%]
-        sm:w-screen min-h-screen sm:h-185 py-2.5 px-5 overflow-y-scroll scrollbar-hide sm:px-12.5 m-auto sm:mx-7.5 rounded-md bg-[#C4E2F5]'>
+        sm:w-screen h-screen sm:h-185 py-2.5 px-5 overflow-y-scroll scrollbar-hide sm:px-12.5 m-auto sm:mx-7.5 rounded-md bg-[#C4E2F5]'>
             <h1 className='text-2xl sm:text-4xl font-bold text-gray-900'>All Products List</h1>
             <div className="listproduct-format-main grid grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr] gap-2.5 py-5 text-[#454545] text-[12px] sm:text-[15px] font-medium w-full">
                 <p>Products</p>

@@ -42,7 +42,7 @@ const Cartitems = () => {
           <div>
             <div className="cartitems-total-item flex justify-between py-3.75">
               <p>Subtotal</p>
-              <p>rs {totalpricecalc()}</p>
+              <p>Rs {totalpricecalc()}</p>
             </div>
             <hr/>
             <div className="cartitems-total-item  flex justify-between py-3.75">

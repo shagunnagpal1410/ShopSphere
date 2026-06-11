@@ -708,23 +708,23 @@
   .px-0 {
     padding-inline: calc(var(--spacing) * 0);
   }
-  .px-0\.5 {
-    padding-inline: calc(var(--spacing) * 0.5);
-  }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
   .px-2\.5 {
     padding-inline: calc(var(--spacing) * 2.5);
   }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-4\.5 {
+    padding-inline: calc(var(--spacing) * 4.5);
+  }
   .px-\[60\.1px\] {
     padding-inline: 60.1px;
   }
-  .py-0 {
-    padding-block: calc(var(--spacing) * 0);
-  }
-  .py-0\.5 {
-    padding-block: calc(var(--spacing) * 0.5);
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
   }
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
@@ -734,6 +734,9 @@
   }
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
   }
   .py-\[40\.1px\] {
     padding-block: 40.1px;
@@ -758,6 +761,9 @@
   }
   .pb-1\.5 {
     padding-bottom: calc(var(--spacing) * 1.5);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
   }
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
@@ -1102,6 +1108,11 @@
       flex-wrap: nowrap;
     }
   }
+  .sm\:gap-6 {
+    @media (width >= 40rem) {
+      gap: calc(var(--spacing) * 6);
+    }
+  }
   .sm\:gap-11\.25 {
     @media (width >= 40rem) {
       gap: calc(var(--spacing) * 11.25);
@@ -1115,16 +1126,6 @@
   .sm\:gap-18\.75 {
     @media (width >= 40rem) {
       gap: calc(var(--spacing) * 18.75);
-    }
-  }
-  .sm\:px-4\.5 {
-    @media (width >= 40rem) {
-      padding-inline: calc(var(--spacing) * 4.5);
-    }
-  }
-  .sm\:py-6 {
-    @media (width >= 40rem) {
-      padding-block: calc(var(--spacing) * 6);
     }
   }
   .sm\:pt-2\.5 {

@@ -7,6 +7,8 @@ const jwt=require('jsonwebtoken');
 const multer=require('multer');
 const path=require('path');
 const app=express();
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 app.use(cors());
 app.use(express.json());
 const dns = require("node:dns");
@@ -23,20 +25,28 @@ mongoose.connect(process.env.MONGODB_URI)
 app.get("/", (req,res)=> {
     res.send("Express app is running successfully");
 })
-const storage=multer.diskStorage({
-    destination: './upload/images',
-    filename:(req,file,cb)=> {
-        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
-    }
-})
-const upload=multer({storage:storage});
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "shopsphere",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+  },
+});
+
+const upload = multer({ storage });
+
 //creating upload endpoint for images
-app.use('/images',express.static('upload/images'))
-app.post('/upload', upload.single('product'), (req, res) => {
-    res.json({
-        success: 1,
-        image_url: `https://shopsphere-nfq5.onrender.com/images/${req.file.filename}`
-    });
+app.post("/upload", upload.single("product"), (req, res) => {
+  res.json({
+    success: 1,
+    image_url: req.file.path, // Cloudinary URL
+  });
 });
 //schema for products
 const Product=mongoose.model("Product", {
@@ -101,7 +111,7 @@ app.post('/addproduct', async (req,res)=> {
 //creating api for deleting product
 app.post('/removeproduct', async (req,res)=> {
     await Product.findOneAndDelete({id:req.body.id});
-    res.json({succes:1,
+    res.json({success:1,
         name:req.body.name,
     })
 })
@@ -201,7 +211,7 @@ const fetchuser=async(req,res,next)=>{
             req.user=data.user;
             next();
         } catch(error) {
-            res.status(401).send({errors:"Pleaseauthenticate using a valid token"});
+            res.status(401).send({errors:"Please authenticate using a valid token"});
         }
     }
 }

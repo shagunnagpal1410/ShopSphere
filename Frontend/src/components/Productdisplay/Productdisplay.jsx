@@ -56,7 +56,7 @@ const Productdisplay = (props) => {
                   <option value="XL">XL</option>
                   <option value="XXL">XXL</option>
                 </select>
-            </div>>
+            </div>
         </div>
         <button onClick={() => {
           addtocart(product.id,size);

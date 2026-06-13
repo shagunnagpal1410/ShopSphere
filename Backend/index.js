@@ -121,19 +121,27 @@ app.get('/allproducts', async (req,res)=> {
     res.send(products);
 })
 //schema for user model
-const Users=mongoose.model("Users",{
+const Users = mongoose.model("Users_copy", {
     name: {
         type: String,
     },
     email: {
         type: String,
         unique: true,
+        required: true,
+        match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid Email']
     },
     password: {
         type: String,
+        required: true,
     },
     cartdata: {
-        type: Object,
+        type: Array,
+        default: [],
+    },
+    purchaseddata: {
+        type: Array,
+        default: [],
     },
     date: {
         type: Date,
@@ -141,50 +149,55 @@ const Users=mongoose.model("Users",{
     }
 })
 //creating endpoint for registering user
-app.post('/signup', async (req,res)=> {
-    let check=await Users.findOne({email:req.body.email});
+app.post('/signup', async (req, res) => {
+    let check = await Users.findOne({ email: req.body.email });
     if (check) {
-        return res.status(400).json({success:false, errors:"User already exists"});
+        return res.status(400).json({ success: false, errors: "User already exists" });
     }
-    let cart={};
-    for (let i=0; i<300; i++) {
-        cart[i]=0;
-    }
-    const user=new Users({
-        name:req.body.username,
-        email:req.body.email,
-        password:req.body.password,
-        cartdata:cart,
-    })
-    await user.save();
-    const data={
-        user: {
-            id:user.id,
+    let cart = [];
+    let purchased = [];
+    try {
+        const user = new Users({
+            name: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            cartdata: cart,
+            purchaseddata: purchased,
+        })
+        await user.save();
+        const data = {
+            user: {
+                id: user.id,
+            }
         }
+        const token = jwt.sign(data, process.env.JWT_SECRET)
+        res.json({ success: true, token: token })
     }
-    const token=jwt.sign(data, process.env.JWT_SECRET)
-    res.json({success:true, token:token})
+    catch {
+        res.status(400).json({success:false, errors: "Invalid Email"});
+    }
+   
 })
 //creating endpoint for login user
-app.post('/login', async (req,res)=> {
-    let user=await Users.findOne({email:req.body.email});
+app.post('/login', async (req, res) => {
+    let user = await Users.findOne({ email: req.body.email });
     if (user) {
-        const passcompare=req.body.password===user.password;
-        if (passcompare){
-            const data={
+        const passcompare = req.body.password === user.password;
+        if (passcompare) {
+            const data = {
                 user: {
-                    id:user.id
+                    id: user.id
                 }
             }
-            const token=jwt.sign(data,process.env.JWT_SECRET);
-            res.json({success:true,token});
+            const token = jwt.sign(data, process.env.JWT_SECRET);
+            res.json({ success: true, token });
         }
         else {
-            res.json({success:false,errors:"Wrong Password"});
+            res.json({ success: false, errors: "Wrong Password" });
         }
     }
     else {
-        res.json({success:false, errors:"Wrong email id"});
+        res.json({ success: false, errors: "This User Exists" });
     }
 })
 //creating endpoint for newcollection
@@ -222,17 +235,39 @@ const fetchuser=async(req,res,next)=>{
     }
 }
 //creating endpoint for adding products in cartdata
-app.post('/addtocart',fetchuser, async (req,res)=> {
-    let userdata=await Users.findOne({_id:req.user.id});
-    userdata.cartdata[req.body.itemId]+=1;
-    await Users.findOneAndUpdate({_id:req.user.id}, {cartdata:userdata.cartdata});
+app.post('/addtocart', fetchuser, async (req, res) => {
+    let userdata = await Users.findOne({ _id: req.user.id });
+    let currcart = userdata.cartdata;
+    let check = currcart.find(item => item.itemid === req.body.itemId && item.size === req.body.size)
+    if (check) {
+        check.quantity += 1;
+    }
+    else {
+        currcart.push({
+            itemid: req.body.itemId,
+            quantity: 1,
+            size: req.body.size
+        });
+    }
+    userdata.cartdata = currcart;
+    userdata.markModified('cartdata');
+    await userdata.save();
     res.send("Added");
 })
 //creating endpoint to remove product from cart
-app.post('/removefromcart',fetchuser, async (req,res)=> {
-    let userdata=await Users.findOne({_id:req.user.id});
-    userdata.cartdata[req.body.itemId]>0?userdata.cartdata[req.body.itemId]-=1:userdata.cartdata[req.body.itemId];
-    await Users.findOneAndUpdate({_id:req.user.id}, {cartdata:userdata.cartdata});
+app.post('/removefromcart', fetchuser, async (req, res) => {
+    let userdata = await Users.findOne({ _id: req.user.id });
+    let currcart = userdata.cartdata;
+    let check = currcart.find(item => item.itemid === req.body.itemId && item.size === req.body.size)
+    if (check) {
+        check.quantity -= 1;
+    }
+    if (check && check.quantity === 0) {
+        currcart = currcart.filter(item => item.itemid !== req.body.itemId || item.size !== req.body.size)
+    }
+    userdata.cartdata = currcart;
+    userdata.markModified('cartdata');
+    await userdata.save();
     res.send("Removed");
 })
 //creating endpoint to get cartdata

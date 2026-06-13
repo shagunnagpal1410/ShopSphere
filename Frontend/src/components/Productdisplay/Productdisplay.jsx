@@ -4,9 +4,14 @@ import star from '../Assets/star_icon.png'
 import './output.css'
 import { useContext } from 'react'
 import { ShopContext } from '../../Context/ShopContext'
+import { useState } from 'react'
 const Productdisplay = (props) => {
-  const { product } = props;
-  const { addtocart } = useContext(ShopContext);
+    const {product}=props;
+    const {addtocart}=useContext(ShopContext);
+    const [size, setsize] = useState("XXS");
+    const changesize=(e)=> {
+      setsize(e.target.value);
+    }
   return (
     <div className='flex sm:mx-42.5 flex-col sm:flex-row mx-5'>
       <div className="productdisplay-left flex gap-4.25 ">
@@ -41,18 +46,20 @@ const Productdisplay = (props) => {
         <div className="productdisplay-rightdesc"></div>
         <div className="productdisplay-rightsize">
           <h1 className=' mt-13.75  text-[#656565] font-semibold'>Select Size</h1>
-          <select className="productdisplay-rightsizes my-6 px-4.5 py-6 border border-[#ebebeb] bg-[#fbfbfb] rounded-[3px] cursor-pointer">
-            <option >XXS</option>
-            <option >XS</option>
-            <option >S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-            <option>XXL</option>
-        </select>
+          <div className="productdisplay-rightsizes flex my-6 font-semibold gap-5">
+                <select onChange={(e)=>changesize(e)} className='px-0.5 py-0.5 sm:px-4.5 sm:py-6 border border-[#ebebeb] bg-[#fbfbfb] rounded-[3px] cursor-pointer' name='size'>
+                  <option value="XXS">XXS</option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </select>
+            </div>>
         </div>
         <button onClick={() => {
-          addtocart(product.id);
+          addtocart(product.id,size);
         }} className='px-2.5 py-5 text-16px] font-semibold bg-red-500 mb-10 cursor-pointer'>ADD TO CART</button>
         <p className='productdisplay-rightcategory mt-2.5 '>
           <span className='font-semibold'>Category: </span>Women, T-shirt, Crop Top

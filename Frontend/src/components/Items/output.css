@@ -831,6 +831,10 @@
     --tw-leading: calc(var(--spacing) * 1.5);
     line-height: calc(var(--spacing) * 1.5);
   }
+  .leading-2 {
+    --tw-leading: calc(var(--spacing) * 2);
+    line-height: calc(var(--spacing) * 2);
+  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);

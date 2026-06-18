@@ -9,7 +9,7 @@ const Item = (props) => {
         <img onClick={window.scrollTo(0,0)} src={props.image} className= ' h-[15vh] w-[30vw] sm:w-[16vw] sm:h-[30vh] object-cover overflow-hidden'></img>
       </Link>
       </div>
-      <p className='h-[5vh] sm:h-[7.5vh] w-full my-[6px] text-[10px] sm:text-[18px] leading-none text-center'>
+      <p className='h-[5vh] sm:h-[7.5vh] w-full flex flex-col items-center text-[10px] sm:text-[18px] leading-none text-center'>
   {props.name}
 </p>
       <div className="item-prices flex gap-5 h-[5vh] sm:h-[7.5vh] w-full justify-center">

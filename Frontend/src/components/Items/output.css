@@ -197,6 +197,9 @@
   .my-25 {
     margin-block: calc(var(--spacing) * 25);
   }
+  .my-\[6px\] {
+    margin-block: 6px;
+  }
   .my-\[20\.1px\] {
     margin-block: 20.1px;
   }
@@ -834,6 +837,10 @@
   .leading-2 {
     --tw-leading: calc(var(--spacing) * 2);
     line-height: calc(var(--spacing) * 2);
+  }
+  .leading-none {
+    --tw-leading: 1;
+    line-height: 1;
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);

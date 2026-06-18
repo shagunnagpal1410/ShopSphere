@@ -23,7 +23,7 @@ const Login = () => {
       window.location.replace("/");
     }
     else {
-      alert(responsedata.errors);
+      alert("You need to sign up");
     }
   }
   const signup=async ()=> {
